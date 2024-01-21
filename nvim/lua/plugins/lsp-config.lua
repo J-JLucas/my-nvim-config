@@ -6,7 +6,7 @@
 -- autocomplete:
 -- https://github.com/hrsh7th/nvim-cmp
 -- luasnip snippet engine:
--- https://github.com/L3MON4D3/LuaSnip
+-- https://github.com/L3MON4D3/LuaSnips
 -- auto braces:
 -- https://github.com/windwp/nvim-autopairs
 return {
@@ -48,6 +48,10 @@ return {
             require("luasnip").lsp_expand(args.body)
           end,
         },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
         mapping = cmp.mapping.preset.insert({
           ['<Tab>'] = cmp.mapping.confirm({ select = true }),
           ['<Up>'] = cmp.mapping.select_prev_item(),
@@ -86,10 +90,11 @@ return {
       --      })
     end
   },
-
   {
     "neovim/nvim-lspconfig",
+    lazy = false,
     config = function()
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
       local lspconfig = require("lspconfig")
       local on_attach = function(client, bufnr)
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
@@ -97,12 +102,12 @@ return {
         vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
       end
 
-      lspconfig.lua_ls.setup({ on_attach = on_attach })
-      lspconfig.clangd.setup({ on_attach = on_attach })
-      lspconfig.pyright.setup({ on_attach = on_attach })
-      lspconfig.bashls.setup({ on_attach = on_attach })
-      lspconfig.cmake.setup({ on_attach = on_attach })
-      lspconfig.marksman.setup({ on_attach = on_attach })
+      lspconfig.lua_ls.setup({ on_attach = on_attach, capabilities = capabilities })
+      lspconfig.clangd.setup({ on_attach = on_attach, capabilities = capabilities })
+      lspconfig.pyright.setup({ on_attach = on_attach, capabilities = capabilities })
+      lspconfig.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
+      lspconfig.cmake.setup({ on_attach = on_attach, capabilities = capabilities })
+      lspconfig.marksman.setup({ on_attach = on_attach, capabilities = capabilities })
     end
   },
 }
