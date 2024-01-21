@@ -37,7 +37,7 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",     -- latest stable release
+    "--branch=stable", -- latest stable release
     lazypath,
   })
 end
@@ -52,7 +52,7 @@ if hour >= 5 and hour < 17 then
   vim.cmd('colorscheme dawnfox')
 else
   -- Set the nighttime theme
-  vim.cmd('colorscheme jellybeans')
+  vim.cmd('colorscheme brown')
 end
 
 -- format file on close
