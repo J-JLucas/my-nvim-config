@@ -47,12 +47,13 @@ require("lazy").setup("plugins")
 -- set theme depending on system time
 local hour = os.date("*t").hour
 -- Check if the hour is between 5am and 5pm
-if hour >= 5 and hour < 17 then
+if hour >= 5 and hour < 16 then
   -- Set the daytime theme
   vim.cmd('colorscheme dawnfox')
 else
   -- Set the nighttime theme
-  vim.cmd('colorscheme brown')
+  -- vim.cmd('colorscheme brown')
+  vim.cmd('colorscheme jellybeans')
 end
 
 -- format file on close
